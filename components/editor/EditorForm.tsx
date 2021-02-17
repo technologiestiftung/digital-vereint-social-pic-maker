@@ -21,6 +21,7 @@ const FormInput: FC<FormInputType> = ({
   placeholder,
   onChange,
   onClear,
+  ...rest
 }) => (
   <div className='relative'>
     {value && onClear && (
@@ -41,6 +42,7 @@ const FormInput: FC<FormInputType> = ({
       name={name}
       onChange={onChange}
       placeholder={`${placeholder || `Enter a ${name}`}`}
+      {...rest}
     />
   </div>
 );
@@ -88,6 +90,8 @@ const EditorForm: FC = () => {
           label='Width'
           type='number'
           name='width'
+          min={400}
+          max={3000}
           placeholder={`${defaults.width}`}
           onChange={e => onWidthChange(parseInt(e?.target?.value, 10))}
           value={draft.width}
@@ -96,6 +100,8 @@ const EditorForm: FC = () => {
           label='Height'
           type='number'
           name='height'
+          min={400}
+          max={3000}
           placeholder={`${defaults.height}`}
           onChange={e => onHeightChange(parseInt(e?.target?.value, 10))}
           value={draft.height}
