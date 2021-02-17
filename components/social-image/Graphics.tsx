@@ -60,7 +60,7 @@ const SocialImageGraphics: FC<SocialImageType> = props => {
         />
       )}
       <div
-        className='relative w-full h-full grid auto-rows-auto content-between'
+        className='relative w-full h-full grid auto-rows-auto content-start'
         style={{
           gridTemplateColumns: `repeat(${squaresPerWidth}, 1fr)`,
         }}
