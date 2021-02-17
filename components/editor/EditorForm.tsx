@@ -48,6 +48,7 @@ const FormInput: FC<FormInputType> = ({
 const EditorForm: FC = () => {
   const {
     draft,
+    imageIsLoading,
     onWidthChange,
     onHeightChange,
     onTextChange,
@@ -130,8 +131,9 @@ const EditorForm: FC = () => {
           Reset values
         </button>
         <button
-          className='px-3 py-2 rounded bg-tertiary text-white font-bold'
+          className='px-3 py-2 rounded bg-tertiary text-white font-bold disabled:opacity-50'
           type='submit'
+          disabled={imageIsLoading}
         >
           Regenerate image
         </button>
