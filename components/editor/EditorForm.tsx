@@ -26,6 +26,7 @@ const FormInput: FC<FormInputType> = ({
   <div className='relative'>
     {value && onClear && (
       <button
+        type='button'
         onClick={onClear}
         className='absolute top-0 right-0 text-tertiary text-sm underline cursor-pointer'
       >
