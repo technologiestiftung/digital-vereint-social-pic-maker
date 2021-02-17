@@ -1,4 +1,5 @@
-import { FC } from "react";
+import { FC, InputHTMLAttributes, useContext } from "react";
+import { EditorContext } from "./EditorContext";
 
 const defaults = {
   width: 1200,
@@ -7,10 +8,8 @@ const defaults = {
   text: "",
 };
 
-interface FormInputType extends Partial<HTMLInputElement> {
-  name: string;
+interface FormInputType extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
-  placeholder: string;
 }
 
 const FormInput: FC<FormInputType> = ({
@@ -19,6 +18,7 @@ const FormInput: FC<FormInputType> = ({
   value,
   name,
   placeholder,
+  onChange,
 }) => (
   <div>
     <label className='block uppercase' htmlFor={name}>
@@ -29,58 +29,102 @@ const FormInput: FC<FormInputType> = ({
       value={value}
       type={type}
       name={name}
+      onChange={onChange}
       placeholder={`${placeholder || `Enter a ${name}`}`}
     />
   </div>
 );
 
-const EditorForm: FC = () => (
-  <form className='p-8'>
-    <fieldset className='grid grid-cols-2 gap-4 mb-4'>
-      <FormInput
-        label='Width'
-        type='number'
-        name='width'
-        placeholder={`${defaults.width}`}
-      />
-      <FormInput
-        label='Height'
-        type='number'
-        name='Height'
-        placeholder={`${defaults.height}`}
-      />
-    </fieldset>
-    <fieldset className='mb-4'>
-      <FormInput
-        label='Text'
-        type='text'
-        name='text'
-        placeholder={`${defaults.text}`}
-      />
-    </fieldset>
-    <fieldset className='mb-4'>
-      <FormInput
-        label='Background image'
-        type='url'
-        name='imgUrl'
-        placeholder={`${defaults.imgUrl}`}
-      />
-    </fieldset>
-    <fieldset className='mt-8 flex justify-end'>
-      <button
-        className='px-3 py-2 mr-2 rounded border border-gray-500 text-black'
-        type='reset'
-      >
-        Reset values
-      </button>
-      <button
-        className='px-3 py-2 rounded bg-tertiary text-white font-bold'
-        type='submit'
-      >
-        Regenerate image
-      </button>
-    </fieldset>
-  </form>
-);
+const EditorForm: FC = () => {
+  const {
+    draft,
+    onWidthChange,
+    onHeightChange,
+    onTextChange,
+    onImgUrlChange,
+    onSubmit,
+  } = useContext(EditorContext);
+
+  const handleSubmit = (evt: HTMLFormElement["onSubmit"]): void => {
+    evt.preventDefault();
+    const data = new FormData(evt.target);
+    const width = data.get("width") || "1200";
+    const height = data.get("height") || "640";
+    const text = data.get("text") || "";
+    const imgUrl = data.get("imgUrl") || "";
+
+    if (
+      typeof width !== "string" ||
+      typeof height !== "string" ||
+      typeof text !== "string" ||
+      typeof imgUrl !== "string"
+    )
+      return;
+
+    onSubmit({
+      width: parseInt(width, 10),
+      height: parseInt(height, 10),
+      text,
+      imgUrl,
+    });
+  };
+
+  return (
+    <form className='p-8' onSubmit={handleSubmit}>
+      <fieldset className='grid grid-cols-2 gap-4 mb-4'>
+        <FormInput
+          label='Width'
+          type='number'
+          name='width'
+          placeholder={`${defaults.width}`}
+          onChange={e => onWidthChange(parseInt(e?.target?.value, 10))}
+          value={draft.width}
+        />
+        <FormInput
+          label='Height'
+          type='number'
+          name='Height'
+          placeholder={`${defaults.height}`}
+          onChange={e => onHeightChange(parseInt(e?.target?.value, 10))}
+          value={draft.height}
+        />
+      </fieldset>
+      <fieldset className='mb-4'>
+        <FormInput
+          label='Text'
+          type='text'
+          name='text'
+          placeholder={`${defaults.text}`}
+          onChange={e => onTextChange(e?.target?.value)}
+          value={draft.text}
+        />
+      </fieldset>
+      <fieldset className='mb-4'>
+        <FormInput
+          label='Background image'
+          type='url'
+          name='imgUrl'
+          placeholder={`${defaults.imgUrl}`}
+          onChange={e => onImgUrlChange(e?.target?.value)}
+          value={draft.imgUrl}
+        />
+      </fieldset>
+      <fieldset className='mt-8 flex justify-end'>
+        <button
+          className='px-3 py-2 mr-2 rounded border border-gray-500 text-black'
+          type='reset'
+        >
+          Reset values
+        </button>
+        <button
+          className='px-3 py-2 rounded bg-tertiary text-white font-bold'
+          type='submit'
+        >
+          Regenerate image
+        </button>
+      </fieldset>
+    </form>
+  );
+};
 
 export default EditorForm;
