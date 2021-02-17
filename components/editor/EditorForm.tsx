@@ -10,6 +10,7 @@ const defaults = {
 
 interface FormInputType extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
+  onClear?: () => void;
 }
 
 const FormInput: FC<FormInputType> = ({
@@ -19,8 +20,17 @@ const FormInput: FC<FormInputType> = ({
   name,
   placeholder,
   onChange,
+  onClear,
 }) => (
-  <div>
+  <div className='relative'>
+    {value && onClear && (
+      <button
+        onClick={onClear}
+        className='absolute top-0 right-0 text-tertiary text-sm underline cursor-pointer'
+      >
+        clear
+      </button>
+    )}
     <label className='block uppercase' htmlFor={name}>
       {label}
     </label>
@@ -83,7 +93,7 @@ const EditorForm: FC = () => {
         <FormInput
           label='Height'
           type='number'
-          name='Height'
+          name='height'
           placeholder={`${defaults.height}`}
           onChange={e => onHeightChange(parseInt(e?.target?.value, 10))}
           value={draft.height}
@@ -97,6 +107,7 @@ const EditorForm: FC = () => {
           placeholder={`${defaults.text}`}
           onChange={e => onTextChange(e?.target?.value)}
           value={draft.text}
+          onClear={() => onTextChange("")}
         />
       </fieldset>
       <fieldset className='mb-4'>
@@ -107,6 +118,7 @@ const EditorForm: FC = () => {
           placeholder={`${defaults.imgUrl}`}
           onChange={e => onImgUrlChange(e?.target?.value)}
           value={draft.imgUrl}
+          onClear={() => onImgUrlChange("")}
         />
       </fieldset>
       <fieldset className='mt-8 flex justify-end'>
