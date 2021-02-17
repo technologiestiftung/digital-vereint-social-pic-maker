@@ -11,6 +11,7 @@ module.exports = {
     theme: {
         fontFamily: {
             sans: [
+                "Archivo",
                 "ui-sans-serif",
                 "system-ui",
                 "-apple-system",

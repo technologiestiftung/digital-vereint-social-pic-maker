@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer base {
+    @font-face {
+		font-family: Archivo;
+		font-display: swap;
+		font-weight: 400;
+		font-style: normal;
+		src: url('/fonts/archivo/Archivo-Regular.ttf') format('truetype');
+	}
+
+	@font-face {
+		font-family: Archivo;
+		font-display: swap;
+		font-weight: 500;
+		font-style: normal;
+		src: url('/fonts/archivo/Archivo-Medium.ttf') format('truetype');
+	}
+
+	@font-face {
+		font-family: Archivo;
+		font-display: swap;
+		font-weight: 600;
+		font-style: normal;
+		src: url('/fonts/archivo/Archivo-SemiBold.ttf') format('truetype');
+	}
+}
