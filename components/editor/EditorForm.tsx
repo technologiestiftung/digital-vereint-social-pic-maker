@@ -76,6 +76,7 @@ const EditorForm: FC = () => {
       height: parseInt(height, 10),
       text,
       imgUrl,
+      version: Date.now(),
     });
   };
 

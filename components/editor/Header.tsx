@@ -6,7 +6,7 @@ const EditorHeader: FC = () => (
     style={{ gridTemplateColumns: "132px 1fr" }}
   >
     <img src='/logo.svg' alt='Digital Vereint Logo' className='mb-2' />
-    <h1 className='text-xl font-bold leading-5 pl-4 border-l'>
+    <h1 className='text-xl leading-5 pl-4 border-l'>
       Picture
       <br />
       Maker
