@@ -15,9 +15,9 @@ const shouldSquareBeVisible = ({
   squaresPerWidth,
   amountOfSquares,
 }: ShouldSquareBeVisibleType): boolean => {
-  if (!imgUrl) return false;
   if (key < 2) return false;
   if (key >= squaresPerWidth && key < squaresPerWidth + 2) return false;
+  if (!imgUrl) return true;
 
   const quarterOfSquaresPerWidth = Math.floor(squaresPerWidth / 4);
   const indexInRow = key % squaresPerWidth;
