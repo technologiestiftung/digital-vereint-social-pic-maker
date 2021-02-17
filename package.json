@@ -6,7 +6,6 @@
     "cm": "cz",
     "test": "jest --passWithNoTests",
     "dev": "next dev",
-    "postbuild": "next-on-netlify",
     "build": "next build",
     "start": "next start",
     "lint": "eslint --ext js,jsx,ts,tsx .",
