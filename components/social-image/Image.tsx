@@ -9,7 +9,7 @@ const SocialImageImage: FC<SocialImageType> = ({
   imgUrl,
 }) => (
   <div
-    className='fixed bg-primary bg-cover box-border border-primary z-0'
+    className='fixed bg-primary bg-cover bg-center box-border border-primary z-0'
     style={{
       width: width - fullOuterPadding,
       height: height - fullOuterPadding,
