@@ -60,10 +60,10 @@ const SocialImageGraphics: FC<SocialImageType> = props => {
         />
       )}
       <div
-        className={[
-          "relative w-full h-full grid auto-rows-auto content-between",
-          `grid-cols-${squaresPerWidth}`,
-        ].join(" ")}
+        className='relative w-full h-full grid auto-rows-auto content-between'
+        style={{
+          gridTemplateColumns: `repeat(${squaresPerWidth}, 1fr)`,
+        }}
       >
         {[...Array(amountOfSquares)]
           .map((_, key) => ({
