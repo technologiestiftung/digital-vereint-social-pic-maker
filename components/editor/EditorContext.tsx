@@ -29,7 +29,7 @@ interface EditorContextType {
 
 const editorStateDefaults = {
   width: 1200,
-  height: 640,
+  height: 600,
   imgUrl: "",
   text: "",
   version: Date.now(),

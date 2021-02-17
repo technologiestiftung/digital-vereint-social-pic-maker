@@ -10,11 +10,14 @@ const EditorPreview: FC = () => {
     stopLoadingImage,
   } = useContext(EditorContext);
   const { width, height, text, imgUrl, version } = state;
-  const url = `/api/social-image?width=${encodeURIComponent(
-    width
-  )}&height=${encodeURIComponent(height)}&text=${encodeURIComponent(
-    text
-  )}&imgUrl=${encodeURIComponent(imgUrl)}&version=${version}`;
+  const url = [
+    "/api/social-image?",
+    `width=${encodeURIComponent(width)}`,
+    `&height=${encodeURIComponent(height)}`,
+    text ? `&text=${encodeURIComponent(text)}` : "",
+    imgUrl ? `&url=${encodeURIComponent(imgUrl)}` : "",
+    `&version=${version}`,
+  ].join("");
 
   useEffect(() => {
     if (url === lastImgUrl) return;
@@ -28,14 +31,29 @@ const EditorPreview: FC = () => {
   }, [url, startLoadingImage, stopLoadingImage]);
 
   return (
-    <div className='h-screen grid place-content-center place-items-center p-8'>
-      {imageIsLoading ? (
-        "Loading..."
-      ) : (
+    <div
+      className='h-screen grid place-content-center place-items-center p-8 overflow-hidden relative'
+      style={{ width: "calc(100vw - 400px)" }}
+    >
+      <div
+        className={[
+          "rounded bg-center bg-no-repeat bg-contain grid place-content-center max-w-full max-h-full bg-gray-300",
+          imageIsLoading ? "animate-pulse" : "",
+        ].join(" ")}
+        style={{
+          width: `min(${width}px, calc(100vw - 480px))`,
+          height: `min(${height}px, calc(100vh - 80px))`,
+          backgroundImage: imageIsLoading ? "none" : `url(${url})`,
+        }}
+      >
+        {imageIsLoading ? "Loading..." : ""}
+      </div>
+      {!imageIsLoading && (
         <img
           src={url}
-          alt='Social Pic Maker Preview'
-          className='max-w-full rounded'
+          alt='Error'
+          className='absolute w-full h-full top-0 left-0'
+          style={{ opacity: 0.01 }}
         />
       )}
     </div>
