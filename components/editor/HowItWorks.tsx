@@ -34,7 +34,8 @@ const HowItWorks: FC = () => {
           </li>
           <li className={liClassNameCommon}>
             <span className={`${liNumDotClassNameCommon}  bg-tertiary`}>3</span>
-            Laden Sie Ihr frisch heruntergeladenes Bild in soziale Medien hoch.
+            Laden Sie Ihr frisch heruntergeladenes Bild in Ihre soziale Medien
+            hoch.
           </li>
         </ol>
       )}
