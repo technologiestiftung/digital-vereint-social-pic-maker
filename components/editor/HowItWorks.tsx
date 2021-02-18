@@ -13,7 +13,7 @@ const HowItWorks: FC = () => {
         onClick={() => setIsOpened(!isOpened)}
       >
         <h2 className='font-bold text-2xl flex justify-between'>
-          <span>How does it work?</span>
+          <span>Wie funktioniert es?</span>
           <span className='text-2xl font-extralight leading-7 monospace'>
             {isOpened ? "–" : "+"}
           </span>
@@ -23,19 +23,18 @@ const HowItWorks: FC = () => {
         <ol className='px-4 py-3 pb-0'>
           <li className={liClassNameCommon}>
             <span className={`${liNumDotClassNameCommon}  bg-primary`}>1</span>
-            Configure the image using the formular below or use the defaults.
+            Konfigurieren Sie das Bild mit Hilfe des unten stehenden Formulars.
           </li>
           <li className={liClassNameCommon}>
             <span className={`${liNumDotClassNameCommon}  bg-secondary`}>
               2
             </span>
-            Once you&apos;re satisfied with your image, <b>right-click</b> on
-            the image and <b>hit save</b>.
+            Klicken Sie mit der rechten Maustaste auf das Bild und wählen Sie{" "}
+            <b>Speichern</b>.
           </li>
           <li className={liClassNameCommon}>
             <span className={`${liNumDotClassNameCommon}  bg-tertiary`}>3</span>
-            Upload your freshly downloaded image to social media or whereever
-            you like.
+            Laden Sie Ihr frisch heruntergeladenes Bild in soziale Medien hoch.
           </li>
         </ol>
       )}

@@ -43,7 +43,7 @@ const FormInput: FC<FormInputType> = ({
       type={type}
       name={name}
       onChange={onChange}
-      placeholder={`${placeholder || `Enter a ${name}`}`}
+      placeholder={`${placeholder || `Geben Sie ein ${label} ein`}`}
       {...rest}
     />
   </div>
@@ -96,7 +96,7 @@ const EditorForm: FC = () => {
     <form className='p-8' onSubmit={handleSubmit} onReset={handleReset}>
       <fieldset className='grid grid-cols-2 gap-4 mb-4'>
         <FormInput
-          label='Width'
+          label='Breite'
           type='number'
           name='width'
           min={400}
@@ -106,7 +106,7 @@ const EditorForm: FC = () => {
           value={draft.width}
         />
         <FormInput
-          label='Height'
+          label='Höhe'
           type='number'
           name='height'
           min={400}
@@ -118,7 +118,7 @@ const EditorForm: FC = () => {
       </fieldset>
       <fieldset className='mb-4'>
         <FormInput
-          label='Text'
+          label='Textinhalt'
           type='text'
           name='text'
           placeholder={`${defaults.text}`}
@@ -129,7 +129,7 @@ const EditorForm: FC = () => {
       </fieldset>
       <fieldset className='mb-4'>
         <FormInput
-          label='Background image'
+          label='Hintergrundbild URL'
           type='url'
           name='imgUrl'
           placeholder={`${defaults.imgUrl}`}
@@ -143,14 +143,14 @@ const EditorForm: FC = () => {
           className='px-3 py-2 mr-2 rounded border border-gray-500 text-black'
           type='reset'
         >
-          Reset values
+          Zurücksetzen
         </button>
         <button
           className='px-3 py-2 rounded bg-tertiary text-white font-bold disabled:opacity-50'
           type='submit'
           disabled={imageIsLoading}
         >
-          Regenerate image
+          Neu generieren
         </button>
       </fieldset>
     </form>
