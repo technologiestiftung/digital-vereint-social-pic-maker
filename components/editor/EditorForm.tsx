@@ -1,3 +1,4 @@
+import { TEXT_MAX_LENGTH } from "@components/social-image/Text";
 import { FC, InputHTMLAttributes, useContext } from "react";
 import { EditorContext } from "./EditorContext";
 
@@ -24,7 +25,7 @@ const FormInput: FC<FormInputType> = ({
   ...rest
 }) => (
   <div className='relative'>
-    {value && onClear && (
+    {!!value && onClear && (
       <button
         type='button'
         onClick={onClear}
@@ -99,7 +100,7 @@ const EditorForm: FC = () => {
           label='Breite'
           type='number'
           name='width'
-          min={400}
+          min={500}
           max={3000}
           placeholder={`${defaults.width}`}
           onChange={e => onWidthChange(parseInt(e?.target?.value, 10))}
@@ -109,7 +110,7 @@ const EditorForm: FC = () => {
           label='Höhe'
           type='number'
           name='height'
-          min={400}
+          min={500}
           max={3000}
           placeholder={`${defaults.height}`}
           onChange={e => onHeightChange(parseInt(e?.target?.value, 10))}
@@ -118,10 +119,10 @@ const EditorForm: FC = () => {
       </fieldset>
       <fieldset className='mb-4'>
         <FormInput
-          label='Textinhalt'
+          label={`Textinhalt (${(draft.text || "").length}/${TEXT_MAX_LENGTH})`}
           type='text'
           name='text'
-          placeholder={`${defaults.text}`}
+          placeholder='Geben Sie ein TextInhalt ein'
           onChange={e => onTextChange(e?.target?.value)}
           value={draft.text}
           onClear={() => onTextChange("")}

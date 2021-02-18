@@ -16,9 +16,9 @@ type SocialImagePageProps = {
 const SocialImagePage: NextPage<SocialImagePageProps> = ({
   text = "",
   width = "1200",
-  height = "640",
+  height = "600",
   noLogo = false,
-  textPadding = "40",
+  textPadding = "20",
   innerPadding: innerPad = "40",
   outerPadding: outerPad = "0",
   padding,

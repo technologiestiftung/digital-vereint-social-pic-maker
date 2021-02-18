@@ -1,7 +1,6 @@
 import { FC } from "react";
 import SocialImageGraphics from "./Graphics";
 import SocialImageImage from "./Image";
-import Text from "./Text";
 
 export type SocialImageType = {
   text: string;
@@ -17,7 +16,7 @@ export type SocialImageType = {
 };
 
 const SocialImage: FC<SocialImageType> = props => {
-  const { text, width, height, fullOuterPadding, imgUrl } = props;
+  const { width, height, fullOuterPadding, imgUrl } = props;
   return (
     <div
       className='bg-black'
@@ -28,7 +27,6 @@ const SocialImage: FC<SocialImageType> = props => {
     >
       {imgUrl && <SocialImageImage {...props} />}
       <SocialImageGraphics {...props} />
-      {text && <Text {...props} />}
     </div>
   );
 };

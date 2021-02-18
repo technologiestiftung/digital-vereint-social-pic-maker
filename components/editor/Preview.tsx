@@ -34,10 +34,9 @@ const EditorPreview: FC = () => {
     imageToLoad.src = url;
   }, [url, startLoadingImage, stopLoadingImage]);
 
-  console.log(url);
   return (
     <div
-      className='h-screen grid place-content-center place-items-center p-8 overflow-hidden relative'
+      className='h-screen bg-gray-100 grid place-content-center place-items-center p-8 overflow-hidden relative'
       style={{ width: "calc(100vw - 400px)" }}
     >
       <div
