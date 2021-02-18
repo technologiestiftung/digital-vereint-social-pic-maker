@@ -36,18 +36,18 @@ const editorStateDefaults = {
   version: Date.now(),
 };
 
-export const defaults = {
+export const defaults: EditorContextType = {
   state: editorStateDefaults,
   draft: editorStateDefaults,
   imageIsLoading: false,
-  onWidthChange: (): void => undefined,
-  onHeightChange: (): void => undefined,
-  onTextChange: (): void => undefined,
-  onImgUrlChange: (): void => undefined,
-  onSubmit: (): void => undefined,
-  startLoadingImage: (): void => undefined,
-  stopLoadingImage: (): void => undefined,
-  onResetDraft: (): void => undefined,
+  onWidthChange: () => undefined,
+  onHeightChange: () => undefined,
+  onTextChange: () => undefined,
+  onImgUrlChange: () => undefined,
+  onSubmit: () => undefined,
+  startLoadingImage: () => undefined,
+  stopLoadingImage: () => undefined,
+  onResetDraft: () => undefined,
 };
 
 export const EditorContext = createContext<EditorContextType>(defaults);
