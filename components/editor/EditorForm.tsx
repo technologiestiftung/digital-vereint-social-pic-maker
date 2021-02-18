@@ -33,11 +33,12 @@ const FormInput: FC<FormInputType> = ({
         clear
       </button>
     )}
-    <label className='block uppercase' htmlFor={name}>
+    <label className='block text-gray-500' htmlFor={name}>
       {label}
     </label>
     <input
       className='px-4 py-2 border border-gray-400 rounded block w-full'
+      id={name}
       value={value}
       type={type}
       name={name}
