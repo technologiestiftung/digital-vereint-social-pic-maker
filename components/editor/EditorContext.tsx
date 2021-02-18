@@ -36,7 +36,7 @@ const editorStateDefaults = {
   version: Date.now(),
 };
 
-const defaults = {
+export const defaults = {
   state: editorStateDefaults,
   draft: editorStateDefaults,
   imageIsLoading: false,
