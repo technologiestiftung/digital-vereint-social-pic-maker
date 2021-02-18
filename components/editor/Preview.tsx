@@ -15,7 +15,7 @@ const EditorPreview: FC = () => {
     `width=${encodeURIComponent(width)}`,
     `&height=${encodeURIComponent(height)}`,
     text ? `&text=${encodeURIComponent(text)}` : "",
-    imgUrl ? `&url=${encodeURIComponent(imgUrl)}` : "",
+    imgUrl ? `&imgUrl=${encodeURIComponent(imgUrl)}` : "",
     `&version=${version}`,
   ].join("");
 
@@ -27,9 +27,14 @@ const EditorPreview: FC = () => {
       stopLoadingImage();
       lastImgUrl = url;
     };
+    imageToLoad.onerror = function () {
+      stopLoadingImage();
+      lastImgUrl = undefined;
+    };
     imageToLoad.src = url;
   }, [url, startLoadingImage, stopLoadingImage]);
 
+  console.log(url);
   return (
     <div
       className='h-screen grid place-content-center place-items-center p-8 overflow-hidden relative'
@@ -43,7 +48,7 @@ const EditorPreview: FC = () => {
         style={{
           width: `min(${width}px, calc(100vw - 480px))`,
           height: `min(${height}px, calc(100vh - 80px))`,
-          backgroundImage: imageIsLoading ? "none" : `url(${url})`,
+          backgroundImage: imageIsLoading ? "none" : `url("${url}")`,
         }}
       >
         {imageIsLoading ? "Loading..." : ""}

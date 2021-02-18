@@ -1,6 +1,13 @@
 import { FC } from "react";
 import { SocialImageType } from "./index";
 
+const formatText = (text: string): string => {
+  const decodedText = decodeURIComponent(text);
+  return decodedText.length > 100
+    ? `${decodedText.slice(0, 100)}`
+    : decodedText;
+};
+
 const SocialImageText: FC<SocialImageType> = ({
   width,
   height,
@@ -19,7 +26,7 @@ const SocialImageText: FC<SocialImageType> = ({
       )}px ${textPadding}px ${Math.round(textPadding)}px`,
     }}
   >
-    {text.length > 109 ? `${text.slice(0, 109)}...` : text}
+    {formatText(text)}
   </h1>
 );
 
