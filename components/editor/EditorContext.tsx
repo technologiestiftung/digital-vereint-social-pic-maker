@@ -25,6 +25,7 @@ interface EditorContextType {
   onSubmit: StateChangeSignature<ImageStateType, void>;
   startLoadingImage: () => void;
   stopLoadingImage: () => void;
+  onResetDraft: () => void;
 }
 
 const editorStateDefaults = {
@@ -46,6 +47,7 @@ const defaults = {
   onSubmit: () => undefined,
   startLoadingImage: () => undefined,
   stopLoadingImage: () => undefined,
+  onResetDraft: () => undefined,
 };
 
 export const EditorContext = createContext<EditorContextType>(defaults);
@@ -77,6 +79,10 @@ export const EditorProvider: FC = ({ children }) => {
     setState(state);
   };
 
+  const onResetDraft = (): void => {
+    setDraft(defaults.draft);
+  };
+
   const startLoadingImage = (): void => {
     setImageIsLoading(true);
   };
@@ -91,6 +97,7 @@ export const EditorProvider: FC = ({ children }) => {
         state,
         draft,
         imageIsLoading,
+        onResetDraft,
         onWidthChange,
         onHeightChange,
         onTextChange,

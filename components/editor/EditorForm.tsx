@@ -53,6 +53,7 @@ const EditorForm: FC = () => {
   const {
     draft,
     imageIsLoading,
+    onResetDraft,
     onWidthChange,
     onHeightChange,
     onTextChange,
@@ -85,8 +86,14 @@ const EditorForm: FC = () => {
     });
   };
 
+  const handleReset = (evt: HTMLFormElement["onReset"]): void => {
+    evt.preventDefault();
+
+    onResetDraft();
+  };
+
   return (
-    <form className='p-8' onSubmit={handleSubmit}>
+    <form className='p-8' onSubmit={handleSubmit} onReset={handleReset}>
       <fieldset className='grid grid-cols-2 gap-4 mb-4'>
         <FormInput
           label='Width'
