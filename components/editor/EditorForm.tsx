@@ -124,7 +124,7 @@ const EditorForm: FC = () => {
           name='text'
           placeholder='Geben Sie ein TextInhalt ein'
           onChange={e => onTextChange(e?.target?.value)}
-          value={draft.text}
+          value={draft.text?.slice(0, TEXT_MAX_LENGTH)}
           onClear={() => onTextChange("")}
         />
       </fieldset>
