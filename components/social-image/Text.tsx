@@ -15,7 +15,7 @@ const SocialImageText: FC<SocialImageType> = ({
   text,
 }) => (
   <h1
-    className='fixed bg-black text-white text-center leading-tight text-4xl break-normal overflow-hidden z-20'
+    className='fixed bg-black text-white leading-tight text-4xl break-normal overflow-hidden z-20'
     style={{
       maxWidth: `${width}px`,
       left: 0,
