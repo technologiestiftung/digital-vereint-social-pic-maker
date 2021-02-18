@@ -24,13 +24,15 @@ const SocialImageText: FC<TextPropsType> = ({
   height,
 }) => {
   const h1Ref = useRef<HTMLHeadingElement>(null);
-  const [originalHeight, setOriginalHeight] = useState<number | undefined>();
+  const [originalDimensions, setOriginalDimensions] = useState<
+    { width: number; height: number } | undefined
+  >();
 
   useEffect(() => {
-    if (!originalHeight && h1Ref !== null && h1Ref.current) {
-      setOriginalHeight(h1Ref.current.getBoundingClientRect().height);
+    if (!originalDimensions && h1Ref !== null && h1Ref.current) {
+      setOriginalDimensions(h1Ref.current.getBoundingClientRect());
     }
-  }, [originalHeight, setOriginalHeight]);
+  }, [originalDimensions, setOriginalDimensions]);
 
   return (
     <h1
@@ -38,10 +40,18 @@ const SocialImageText: FC<TextPropsType> = ({
       className='absolute bg-black text-white leading-tight text-4xl break-normal overflow-hidden z-20 inline-grid content-center'
       style={{
         WebkitFontSmoothing: "antialiased",
-        maxWidth: `${width}px`,
-        height: originalHeight
+        maxWidth: width,
+        width: originalDimensions
+          ? `${Math.min(
+              Math.ceil(
+                (originalDimensions.width + textPadding * 2) / squareWidth
+              ) * squareWidth,
+              width
+            )}px`
+          : "auto",
+        height: originalDimensions
           ? `${
-              Math.ceil(originalHeight / squareWidth) * squareWidth +
+              Math.ceil(originalDimensions.height / squareWidth) * squareWidth +
               (squareWidth % (squaresPerHeight * squareWidth - height) || 0)
             }px`
           : "auto ",
