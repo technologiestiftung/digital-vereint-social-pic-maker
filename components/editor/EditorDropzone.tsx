@@ -1,4 +1,4 @@
-import { getReadableFileSizeString } from "@utils/fileSize";
+import { getReadableFileSizeString } from "@utils/fileSizeUtil";
 import { FC, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 

@@ -30,6 +30,7 @@ module.exports = {
         },
         extend: {
             colors: {
+                // If you update this list please also update the colorsUtil file
                 primary: '#2F2FA2',
                 secondary: '#E32239',
                 tertiary: '#E24B29',

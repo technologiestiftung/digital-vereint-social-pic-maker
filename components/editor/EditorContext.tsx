@@ -8,7 +8,7 @@ type ImageType =
     }
   | undefined;
 
-interface ImageStateType {
+export interface EditorStateType {
   width: number;
   height: number;
   image: ImageType;
@@ -16,21 +16,21 @@ interface ImageStateType {
   version: number;
 }
 
-type EditorDraftType = Partial<ImageStateType>;
+export type EditorDraftType = Partial<EditorStateType>;
 
 type StateChangeSignature<InputType, OutputType> = (
   state: InputType
 ) => OutputType;
 
 interface EditorContextType {
-  state: ImageStateType;
+  state: EditorStateType;
   draft: EditorDraftType;
   imageIsLoading: boolean;
   onWidthChange: StateChangeSignature<number, void>;
   onHeightChange: StateChangeSignature<number, void>;
   onTextChange: StateChangeSignature<string, void>;
   onImageChange: StateChangeSignature<ImageType, void>;
-  onSubmit: StateChangeSignature<ImageStateType, void>;
+  onSubmit: StateChangeSignature<EditorStateType, void>;
   startLoadingImage: () => void;
   stopLoadingImage: () => void;
   onResetDraft: () => void;
@@ -61,7 +61,7 @@ export const defaults: EditorContextType = {
 export const EditorContext = createContext<EditorContextType>(defaults);
 
 export const EditorProvider: FC = ({ children }) => {
-  const [state, setState] = useState<ImageStateType>(defaults.state);
+  const [state, setState] = useState<EditorStateType>(defaults.state);
   const [draft, setDraft] = useState<EditorDraftType>(defaults.draft);
   const [imageIsLoading, setImageIsLoading] = useState<boolean>(
     defaults.imageIsLoading
@@ -83,7 +83,7 @@ export const EditorProvider: FC = ({ children }) => {
     setDraft({ ...draft, image: value });
   };
 
-  const onSubmit = (state: ImageStateType): void => {
+  const onSubmit = (state: EditorStateType): void => {
     setState(state);
   };
 
