@@ -15,8 +15,8 @@ const DropZone: FC<{ isDragActive: boolean }> = ({ isDragActive }) =>
     <p>Legen Sie die Dateien hier ab ...</p>
   ) : (
     <p>
-      Ziehen Sie einige Dateien per Drag & Drop hierher, oder{" "}
-      <span className='underline'>klicken Sie</span>, um Dateien auszuwählen
+      Ziehen Sie eine Datei per Drag & Drop hierher, oder{" "}
+      <span className='underline'>klicken Sie</span>, um die Datei auszuwählen
     </p>
   );
 
