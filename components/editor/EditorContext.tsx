@@ -1,9 +1,17 @@
 import { FC, createContext, useState } from "react";
 
+type ImageType =
+  | {
+      name: string;
+      url: string;
+      size: number;
+    }
+  | undefined;
+
 interface ImageStateType {
   width: number;
   height: number;
-  imgUrl: string;
+  image: ImageType;
   text: string;
   version: number;
 }
@@ -21,7 +29,7 @@ interface EditorContextType {
   onWidthChange: StateChangeSignature<number, void>;
   onHeightChange: StateChangeSignature<number, void>;
   onTextChange: StateChangeSignature<string, void>;
-  onImgUrlChange: StateChangeSignature<string, void>;
+  onImageChange: StateChangeSignature<ImageType, void>;
   onSubmit: StateChangeSignature<ImageStateType, void>;
   startLoadingImage: () => void;
   stopLoadingImage: () => void;
@@ -31,7 +39,7 @@ interface EditorContextType {
 const editorStateDefaults = {
   width: 1200,
   height: 600,
-  imgUrl: "",
+  image: undefined,
   text: "",
   version: Date.now(),
 };
@@ -43,7 +51,7 @@ export const defaults: EditorContextType = {
   onWidthChange: () => undefined,
   onHeightChange: () => undefined,
   onTextChange: () => undefined,
-  onImgUrlChange: () => undefined,
+  onImageChange: () => undefined,
   onSubmit: () => undefined,
   startLoadingImage: () => undefined,
   stopLoadingImage: () => undefined,
@@ -71,8 +79,8 @@ export const EditorProvider: FC = ({ children }) => {
     setDraft({ ...draft, text: value });
   };
 
-  const onImgUrlChange = (value: string): void => {
-    setDraft({ ...draft, imgUrl: value });
+  const onImageChange = (value: ImageType): void => {
+    setDraft({ ...draft, image: value });
   };
 
   const onSubmit = (state: ImageStateType): void => {
@@ -101,7 +109,7 @@ export const EditorProvider: FC = ({ children }) => {
         onWidthChange,
         onHeightChange,
         onTextChange,
-        onImgUrlChange,
+        onImageChange,
         onSubmit,
         startLoadingImage,
         stopLoadingImage,

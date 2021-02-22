@@ -5,7 +5,7 @@ const liNumDotClassNameCommon =
   "absolute top-2 left-0 inline-grid place-items-center place-content-center leading-3 monospace p-2 rounded-full w-8 h-8 text-white";
 
 const HowItWorks: FC = () => {
-  const [isOpened, setIsOpened] = useState<boolean>(true);
+  const [isOpened, setIsOpened] = useState<boolean>(false);
   return (
     <section className='p-4 border-b'>
       <button

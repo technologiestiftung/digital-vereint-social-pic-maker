@@ -1,6 +1,7 @@
+import { FC, InputHTMLAttributes, useContext, ReactElement } from "react";
 import { TEXT_MAX_LENGTH } from "@components/social-image/Text";
-import { FC, InputHTMLAttributes, useContext } from "react";
 import { EditorContext } from "./EditorContext";
+import { EditorDropzone } from "./EditorDropzone";
 
 const defaults = {
   width: 1200,
@@ -12,43 +13,54 @@ const defaults = {
 interface FormInputType extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
   onClear?: () => void;
+  Component?: FC<FormInputType>;
 }
 
-const FormInput: FC<FormInputType> = ({
-  label,
-  type,
-  value,
-  name,
-  placeholder,
-  onChange,
+const FormClassicInput: FC<FormInputType> = ({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  Component,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onClear,
+  name,
+  value,
+  type,
+  onChange,
+  placeholder,
+  label,
   ...rest
 }) => (
-  <div className='relative'>
-    {!!value && onClear && (
-      <button
-        type='button'
-        onClick={onClear}
-        className='absolute top-0 right-0 text-tertiary text-sm underline cursor-pointer'
-      >
-        clear
-      </button>
-    )}
-    <label className='block text-gray-500' htmlFor={name}>
-      {label}
-    </label>
-    <input
-      className='px-4 py-2 border border-gray-400 rounded block w-full'
-      id={name}
-      value={value}
-      type={type}
-      name={name}
-      onChange={onChange}
-      placeholder={`${placeholder || `Geben Sie ein ${label} ein`}`}
-      {...rest}
-    />
-  </div>
+  <input
+    className='px-4 py-2 border border-gray-400 rounded block w-full'
+    id={name}
+    value={value}
+    type={type}
+    name={name}
+    onChange={onChange}
+    placeholder={`${placeholder || `Geben Sie ein ${label} ein`}`}
+    {...rest}
+  />
 );
+
+const FormInput: FC<FormInputType> = props => {
+  const { label, value, name, onClear, Component } = props;
+  return (
+    <div className='relative'>
+      {!!value && onClear && (
+        <button
+          type='button'
+          onClick={onClear}
+          className='absolute top-0 right-0 text-tertiary text-sm underline cursor-pointer'
+        >
+          Löschen
+        </button>
+      )}
+      <label className='block text-gray-500' htmlFor={name}>
+        {label}
+      </label>
+      {Component && <Component {...props} />}
+    </div>
+  );
+};
 
 const EditorForm: FC = () => {
   const {
@@ -58,31 +70,20 @@ const EditorForm: FC = () => {
     onWidthChange,
     onHeightChange,
     onTextChange,
-    onImgUrlChange,
+    onImageChange,
     onSubmit,
   } = useContext(EditorContext);
 
   const handleSubmit = (evt: HTMLFormElement["onSubmit"]): void => {
     evt.preventDefault();
-    const data = new FormData(evt.target);
-    const width = data.get("width") || "1200";
-    const height = data.get("height") || "640";
-    const text = data.get("text") || "";
-    const imgUrl = data.get("imgUrl") || "";
 
-    if (
-      typeof width !== "string" ||
-      typeof height !== "string" ||
-      typeof text !== "string" ||
-      typeof imgUrl !== "string"
-    )
-      return;
+    if (!draft.image) return;
 
     onSubmit({
-      width: parseInt(width, 10),
-      height: parseInt(height, 10),
-      text,
-      imgUrl,
+      width: draft.width || 1200,
+      height: draft.height || 640,
+      text: draft.text || "",
+      image: draft.image,
       version: Date.now(),
     });
   };
@@ -97,6 +98,7 @@ const EditorForm: FC = () => {
     <form className='p-8' onSubmit={handleSubmit} onReset={handleReset}>
       <fieldset className='grid grid-cols-2 gap-4 mb-4'>
         <FormInput
+          Component={FormClassicInput}
           label='Breite'
           type='number'
           name='width'
@@ -107,6 +109,7 @@ const EditorForm: FC = () => {
           value={draft.width}
         />
         <FormInput
+          Component={FormClassicInput}
           label='Höhe'
           type='number'
           name='height'
@@ -119,6 +122,7 @@ const EditorForm: FC = () => {
       </fieldset>
       <fieldset className='mb-4'>
         <FormInput
+          Component={FormClassicInput}
           label={`Textinhalt (${(draft.text || "").length}/${TEXT_MAX_LENGTH})`}
           type='text'
           name='text'
@@ -130,13 +134,16 @@ const EditorForm: FC = () => {
       </fieldset>
       <fieldset className='mb-4'>
         <FormInput
-          label='Hintergrundbild URL'
-          type='url'
-          name='imgUrl'
-          placeholder={`${defaults.imgUrl}`}
-          onChange={e => onImgUrlChange(e?.target?.value)}
-          value={draft.imgUrl}
-          onClear={() => onImgUrlChange("")}
+          Component={(): ReactElement => (
+            <EditorDropzone
+              onImageDropSuccess={onImageChange}
+              value={draft.image}
+            />
+          )}
+          label='Hintergrundbild'
+          name='image'
+          value={draft.image?.url}
+          onClear={() => onImageChange(undefined)}
         />
       </fieldset>
       <fieldset className='mt-8 flex justify-end'>

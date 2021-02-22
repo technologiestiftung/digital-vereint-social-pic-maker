@@ -9,13 +9,13 @@ const EditorPreview: FC = () => {
     startLoadingImage,
     stopLoadingImage,
   } = useContext(EditorContext);
-  const { width, height, text, imgUrl, version } = state;
+  const { width, height, text, image, version } = state;
   const url = [
     "/api/social-image?",
     `width=${encodeURIComponent(width)}`,
     `&height=${encodeURIComponent(height)}`,
     text ? `&text=${encodeURIComponent(text)}` : "",
-    imgUrl ? `&imgUrl=${encodeURIComponent(imgUrl)}` : "",
+    image ? `&imgUrl=${encodeURIComponent(image.url)}` : "",
     `&version=${version}`,
   ].join("");
 

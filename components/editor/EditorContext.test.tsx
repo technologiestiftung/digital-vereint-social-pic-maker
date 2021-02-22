@@ -10,7 +10,7 @@ const TestStateComponent: FC = () => {
       <span data-testid='width'>{state.width}</span>
       <span data-testid='height'>{state.height}</span>
       <span data-testid='text'>{state.text}</span>
-      <span data-testid='imgUrl'>{state.imgUrl}</span>
+      <span data-testid='image'>{state.image?.url}</span>
       <span data-testid='version'>{state.version}</span>
     </>
   );
@@ -33,13 +33,13 @@ describe("State", () => {
     const text = screen.getByTestId("text");
     expect(text).toContainHTML(`${defaults.state.text}`);
   });
-  it("Should make state imgUrl accessible", () => {
-    const imgUrl = screen.getByTestId("imgUrl");
-    expect(imgUrl).toContainHTML(`${defaults.state.imgUrl}`);
+  it("Should make state image accessible", () => {
+    const image = screen.getByTestId("image");
+    expect(image).toContainHTML(`${defaults.state.image?.url || ""}`);
   });
   it("Should make state version accessible", () => {
-    const imgUrl = screen.getByTestId("version");
-    expect(imgUrl).toContainHTML(`${defaults.state.imgUrl}`);
+    const image = screen.getByTestId("version");
+    expect(image).toContainHTML(`${defaults.state.version}`);
   });
 });
 
@@ -51,7 +51,7 @@ const TestDraftComponent: FC = () => {
       <span data-testid='width'>{draft.width}</span>
       <span data-testid='height'>{draft.height}</span>
       <span data-testid='text'>{draft.text}</span>
-      <span data-testid='imgUrl'>{draft.imgUrl}</span>
+      <span data-testid='image'>{draft?.image}</span>
     </>
   );
 };
@@ -73,8 +73,8 @@ describe("Draft", () => {
     const text = screen.getByTestId("text");
     expect(text).toContainHTML(`${defaults.draft.text}`);
   });
-  it("Should make state imgUrl accessible", () => {
-    const imgUrl = screen.getByTestId("imgUrl");
-    expect(imgUrl).toContainHTML(`${defaults.draft.imgUrl}`);
+  it("Should make state image accessible", () => {
+    const image = screen.getByTestId("image");
+    expect(image).toContainHTML(`${defaults.draft.image?.url || ""}`);
   });
 });
