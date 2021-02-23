@@ -11,7 +11,6 @@ const TestStateComponent: FC = () => {
       <span data-testid='height'>{state.height}</span>
       <span data-testid='text'>{state.text}</span>
       <span data-testid='image'>{state.image?.url}</span>
-      <span data-testid='version'>{state.version}</span>
     </>
   );
 };
@@ -36,10 +35,6 @@ describe("State", () => {
   it("Should make state image accessible", () => {
     const image = screen.getByTestId("image");
     expect(image).toContainHTML(`${defaults.state.image?.url || ""}`);
-  });
-  it("Should make state version accessible", () => {
-    const image = screen.getByTestId("version");
-    expect(image).toContainHTML(`${defaults.state.version}`);
   });
 });
 

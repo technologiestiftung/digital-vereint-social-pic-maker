@@ -31,8 +31,8 @@ const shouldSquareBeVisible = ({
   const quarterOfSquaresPerWidth = Math.floor(squaresPerWidth / 4);
 
   const isWithinExtremeQuarters =
-    columnIdx < quarterOfSquaresPerWidth ||
-    columnIdx > squaresPerWidth - quarterOfSquaresPerWidth;
+    columnIdx < quarterOfSquaresPerWidth + 1 ||
+    columnIdx > squaresPerWidth - quarterOfSquaresPerWidth - 1;
   const isFirstLine = rowIdx === 0;
   const isLastLine = rowIdx === squaresPerHeight - 1;
 

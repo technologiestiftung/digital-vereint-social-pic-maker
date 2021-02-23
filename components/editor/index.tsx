@@ -9,7 +9,7 @@ const SocialImageEditor: FC = () => (
   <EditorProvider>
     <main className='grid' style={{ gridTemplateColumns: "1fr 400px" }}>
       <CanvasPreview />
-      <aside className='h-full shadow-2xl'>
+      <aside className='h-screen shadow-2xl overflow-x-hidden overflow-y-auto'>
         <EditorHeader />
         <HowItWorks />
         <EditorForm />

@@ -13,7 +13,6 @@ export interface EditorStateType {
   height: number;
   image: ImageType;
   text: string;
-  version: number;
 }
 
 export type EditorDraftType = Partial<EditorStateType>;
@@ -22,7 +21,7 @@ type StateChangeSignature<InputType, OutputType> = (
   state: InputType
 ) => OutputType;
 
-interface EditorContextType {
+export interface EditorContextType {
   state: EditorStateType;
   draft: EditorDraftType;
   imageIsLoading: boolean;
@@ -41,7 +40,6 @@ const editorStateDefaults = {
   height: 600,
   image: undefined,
   text: "",
-  version: Date.now(),
 };
 
 export const defaults: EditorContextType = {
@@ -85,10 +83,12 @@ export const EditorProvider: FC = ({ children }) => {
 
   const onSubmit = (state: EditorStateType): void => {
     setState(state);
+    setImageIsLoading(true);
   };
 
   const onResetDraft = (): void => {
     setDraft(defaults.draft);
+    setState(defaults.state);
   };
 
   const startLoadingImage = (): void => {

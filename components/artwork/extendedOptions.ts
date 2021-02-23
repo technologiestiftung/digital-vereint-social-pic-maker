@@ -1,5 +1,6 @@
 import { EditorDraftType } from "@components/editor/EditorContext";
 import { colors } from "@utils/colorsUtil";
+import { Font } from "p5";
 
 export interface ExtendedOptionsType extends EditorDraftType {
   squaresPerWidth: number;
@@ -11,10 +12,12 @@ export interface ExtendedOptionsType extends EditorDraftType {
   smallestSideSize: number;
   longestSideSize: number;
   colors: typeof colors;
+  font?: Font;
 }
 
 export const extendOptions = (
-  options: EditorDraftType
+  options: EditorDraftType,
+  font?: Font
 ): ExtendedOptionsType => {
   const width = options.width || 1200;
   const height = options.height || 640;
@@ -39,5 +42,6 @@ export const extendOptions = (
     squaresPerHeight,
     squaresPerWidth,
     colors,
+    font,
   };
 };

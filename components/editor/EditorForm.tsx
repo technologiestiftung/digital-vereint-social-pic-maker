@@ -1,7 +1,11 @@
 import { FC, InputHTMLAttributes, useContext, ReactElement } from "react";
-import { TEXT_MAX_LENGTH } from "@components/social-image/Text";
+import { TEXT_MAX_LENGTH } from "@components/artwork/text";
+import DownloadIcon from "@components/icons/DownloadIcon";
+import ReloadIcon from "@components/icons/ReloadIcon";
+import DeleteIcon from "@components/icons/DeleteIcon";
 import { EditorContext } from "./EditorContext";
 import { EditorDropzone } from "./EditorDropzone";
+import { CANVAS_CONTAINER_ID } from "./CanvasPreview";
 
 const defaults = {
   width: 1200,
@@ -15,6 +19,21 @@ interface FormInputType extends InputHTMLAttributes<HTMLInputElement> {
   onClear?: () => void;
   Component?: FC<FormInputType>;
 }
+
+const onImageSave = (): void => {
+  const canvas = document
+    .getElementById(CANVAS_CONTAINER_ID)
+    ?.querySelector("canvas");
+
+  if (!canvas) return;
+
+  const link = document.createElement("a");
+  const { width, height } = canvas.getBoundingClientRect();
+  link.download = `digital-vereint-social-pic-${width}x${height}.png`;
+  link.href = canvas.toDataURL();
+  link.click();
+  link.remove();
+};
 
 const FormClassicInput: FC<FormInputType> = ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -77,14 +96,11 @@ const EditorForm: FC = () => {
   const handleSubmit = (evt: HTMLFormElement["onSubmit"]): void => {
     evt.preventDefault();
 
-    if (!draft.image) return;
-
     onSubmit({
       width: draft.width || 1200,
       height: draft.height || 640,
       text: draft.text || "",
       image: draft.image,
-      version: Date.now(),
     });
   };
 
@@ -127,7 +143,9 @@ const EditorForm: FC = () => {
           type='text'
           name='text'
           placeholder='Geben Sie ein TextInhalt ein'
-          onChange={e => onTextChange(e?.target?.value)}
+          onChange={e =>
+            onTextChange(e?.target?.value.slice(0, TEXT_MAX_LENGTH))
+          }
           value={draft.text?.slice(0, TEXT_MAX_LENGTH)}
           onClear={() => onTextChange("")}
         />
@@ -146,19 +164,33 @@ const EditorForm: FC = () => {
           onClear={() => onImageChange(undefined)}
         />
       </fieldset>
-      <fieldset className='mt-8 flex justify-end'>
+      <fieldset className='mt-8 grid grid-cols-2 gap-2'>
         <button
-          className='px-3 py-2 mr-2 rounded border border-gray-500 text-black'
+          className='px-3 py-2 rounded border border-gray-500 text-black'
           type='reset'
+          disabled={imageIsLoading}
         >
           Zurücksetzen
+          <DeleteIcon />
         </button>
         <button
-          className='px-3 py-2 rounded bg-tertiary text-white font-bold disabled:opacity-50'
+          className='px-3 py-2 rounded border border-gray-500 text-black'
+          type='button'
+          onClick={onImageSave}
+          disabled={imageIsLoading}
+        >
+          Bild speichern
+          <DownloadIcon />
+        </button>
+      </fieldset>
+      <fieldset className='mt-2'>
+        <button
+          className='w-full px-3 py-2 rounded bg-tertiary text-white font-bold disabled:opacity-50'
           type='submit'
           disabled={imageIsLoading}
         >
           Neu generieren
+          <ReloadIcon />
         </button>
       </fieldset>
     </form>

@@ -1,5 +1,5 @@
 import { Image } from "p5";
-import { EditorDraftType } from "@components/editor/EditorContext";
+import { ExtendedOptionsType } from "./extendedOptions";
 import { SketchType } from ".";
 
 const gt = (a: number, b: number): boolean => a > b;
@@ -8,12 +8,16 @@ const lt = (a: number, b: number): boolean => a < b;
 export const drawBackgroundImage = (
   sketch: SketchType,
   bgImage: Image,
-  options: EditorDraftType,
+  options: ExtendedOptionsType,
   bgCoverMode: "cover" | "contain" = "cover"
 ): void => {
-  const { width, height } = options;
+  const { width, height, image, colors } = options;
 
   if (!width || !height) return;
+  if (!image) {
+    sketch.background(sketch.color(colors.black));
+    return;
+  }
 
   bgImage.loadPixels();
 
