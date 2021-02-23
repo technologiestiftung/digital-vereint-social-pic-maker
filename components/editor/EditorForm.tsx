@@ -236,7 +236,7 @@ const EditorForm: FC = () => {
           type='submit'
           disabled={imageIsLoading}
         >
-          Neu generieren
+          Bild generieren
           <ReloadIcon />
         </button>
       </fieldset>

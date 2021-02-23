@@ -22,18 +22,22 @@ const HowItWorks: FC = () => {
       {isOpened && (
         <ol className='px-4 py-3 pb-0'>
           <li className={liClassNameCommon}>
-            <span className={`${liNumDotClassNameCommon}  bg-primary`}>1</span>
+            <span className={`${liNumDotClassNameCommon}  bg-black`}>1</span>
             Konfigurieren Sie das Bild mit Hilfe des unten stehenden Formulars.
           </li>
           <li className={liClassNameCommon}>
-            <span className={`${liNumDotClassNameCommon}  bg-secondary`}>
-              2
-            </span>
-            Klicken Sie mit der rechten Maustaste auf das Bild und wählen Sie{" "}
-            <b>Speichern</b>.
+            <span className={`${liNumDotClassNameCommon}  bg-primary`}>2</span>
+            Klicken Sie auf <b>Bild generieren</b>, um ein Bild zu erstellen.
           </li>
           <li className={liClassNameCommon}>
-            <span className={`${liNumDotClassNameCommon}  bg-tertiary`}>3</span>
+            <span className={`${liNumDotClassNameCommon}  bg-secondary`}>
+              3
+            </span>
+            Klicken Sie auf <b>Bild speichern</b>, um es auf Ihrem Computer zu
+            speichern.
+          </li>
+          <li className={liClassNameCommon}>
+            <span className={`${liNumDotClassNameCommon}  bg-tertiary`}>4</span>
             Laden Sie Ihr frisch heruntergeladenes Bild in Ihre soziale Medien
             hoch.
           </li>
