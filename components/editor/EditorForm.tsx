@@ -81,6 +81,42 @@ const FormInput: FC<FormInputType> = props => {
   );
 };
 
+const SwitchInput: FC<{
+  label: string;
+  isActve?: boolean;
+  onToggle: () => void;
+}> = ({ isActve, label, onToggle }) => (
+  <div className='grid h-7' style={{ gridTemplateColumns: "1fr 48px" }}>
+    <button
+      className='inline-block text-gray-500 text-left'
+      onClick={e => {
+        e.preventDefault();
+        onToggle();
+      }}
+    >
+      {label}
+    </button>
+    <button
+      onClick={e => {
+        e.preventDefault();
+        onToggle();
+      }}
+      className={[
+        "inline-block h-7 rounded-full text-left transition opacity-70 hover:opacity-100",
+        "focus:outline-none focus:ring-offset-2 focus:ring-primary focus:ring-2 focus:ring-offset-white",
+        isActve ? "bg-primary" : "bg-gray-300",
+      ].join(" ")}
+    >
+      <span
+        className={[
+          "w-5 h-5 inline-block transform rounded-full m-1 transition",
+          isActve ? "translate-x-5 bg-gray-100" : "bg-gray-500",
+        ].join(" ")}
+      />
+    </button>
+  </div>
+);
+
 const EditorForm: FC = () => {
   const {
     draft,
@@ -91,6 +127,7 @@ const EditorForm: FC = () => {
     onTextChange,
     onImageChange,
     onSubmit,
+    toggleColorFilter,
   } = useContext(EditorContext);
 
   const handleSubmit = (evt: HTMLFormElement["onSubmit"]): void => {
@@ -101,6 +138,7 @@ const EditorForm: FC = () => {
       height: draft.height || 640,
       text: draft.text || "",
       image: draft.image,
+      isColorFilterActive: draft.isColorFilterActive || false,
     });
   };
 
@@ -164,6 +202,15 @@ const EditorForm: FC = () => {
           onClear={() => onImageChange(undefined)}
         />
       </fieldset>
+      {draft.image && (
+        <fieldset className='mb-4'>
+          <SwitchInput
+            label='Farbfilter anwenden'
+            onToggle={toggleColorFilter}
+            isActve={draft.isColorFilterActive}
+          />
+        </fieldset>
+      )}
       <fieldset className='mt-8 grid grid-cols-2 gap-2'>
         <button
           className='px-3 py-2 rounded border border-gray-500 text-black'

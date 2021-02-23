@@ -13,6 +13,7 @@ export interface EditorStateType {
   height: number;
   image: ImageType;
   text: string;
+  isColorFilterActive: boolean;
 }
 
 export type EditorDraftType = Partial<EditorStateType>;
@@ -33,6 +34,7 @@ export interface EditorContextType {
   startLoadingImage: () => void;
   stopLoadingImage: () => void;
   onResetDraft: () => void;
+  toggleColorFilter: () => void;
 }
 
 const editorStateDefaults = {
@@ -40,6 +42,7 @@ const editorStateDefaults = {
   height: 600,
   image: undefined,
   text: "",
+  isColorFilterActive: true,
 };
 
 export const defaults: EditorContextType = {
@@ -54,6 +57,7 @@ export const defaults: EditorContextType = {
   startLoadingImage: () => undefined,
   stopLoadingImage: () => undefined,
   onResetDraft: () => undefined,
+  toggleColorFilter: () => undefined,
 };
 
 export const EditorContext = createContext<EditorContextType>(defaults);
@@ -99,6 +103,10 @@ export const EditorProvider: FC = ({ children }) => {
     setImageIsLoading(false);
   };
 
+  const toggleColorFilter = (): void => {
+    setDraft({ ...draft, isColorFilterActive: !draft.isColorFilterActive });
+  };
+
   return (
     <EditorContext.Provider
       value={{
@@ -113,6 +121,7 @@ export const EditorProvider: FC = ({ children }) => {
         onSubmit,
         startLoadingImage,
         stopLoadingImage,
+        toggleColorFilter,
       }}
     >
       {children}

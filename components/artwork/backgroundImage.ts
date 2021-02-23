@@ -11,7 +11,7 @@ export const drawBackgroundImage = (
   options: ExtendedOptionsType,
   bgCoverMode: "cover" | "contain" = "cover"
 ): void => {
-  const { width, height, image, colors } = options;
+  const { width, height, image, colors, isColorFilterActive } = options;
 
   if (!width || !height) return;
   if (!image) {
@@ -40,4 +40,11 @@ export const drawBackgroundImage = (
     dimensions.width,
     dimensions.height
   );
+
+  if (isColorFilterActive) {
+    sketch.blendMode(sketch.SCREEN);
+    sketch.fill(sketch.color(colors.primary));
+    sketch.rect(0, 0, width, height);
+    sketch.blendMode(sketch.NORMAL);
+  }
 };
