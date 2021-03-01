@@ -45,8 +45,8 @@ export const RegenerateArtwortTooltip: FC = () => {
           }}
         >
           <p className='leading-tight'>
-            Clicken Sie hier mehrmals an, um die &ldquo;Artwork&rdquo; neu zu
-            generieren
+            Sie können mehrmals auf diese Schaltfläche klicken, um verschiedene
+            Muster zu erzeugen.
           </p>
           <button
             onClick={onOkClick}
