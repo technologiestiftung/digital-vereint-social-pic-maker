@@ -28,7 +28,7 @@ const shouldSquareBeVisible = ({
   if (columnIdx < 2 && rowIdx < 2) return false;
   if (!image) return true;
 
-  const quarterOfSquaresPerWidth = Math.floor(squaresPerWidth / 4);
+  const quarterOfSquaresPerWidth = Math.floor(squaresPerWidth / 6);
 
   const isWithinExtremeQuarters =
     columnIdx < quarterOfSquaresPerWidth + 1 ||
@@ -36,10 +36,9 @@ const shouldSquareBeVisible = ({
   const isFirstLine = rowIdx === 0;
   const isLastLine = rowIdx === squaresPerHeight - 1;
 
-  if (!(isWithinExtremeQuarters || isFirstLine || isLastLine))
-    return Math.random() > 0.98;
+  if (!(isWithinExtremeQuarters || isFirstLine || isLastLine)) return false;
 
-  return Math.random() >= 0.1;
+  return Math.random() >= 0.2;
 };
 
 const createSquaresMatrix = (

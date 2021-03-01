@@ -1,15 +1,12 @@
 import { Image } from "p5";
 import { ExtendedOptionsType } from "./extendedOptions";
 import { SketchType } from ".";
-
-const gt = (a: number, b: number): boolean => a > b;
-const lt = (a: number, b: number): boolean => a < b;
+import { getCoverImageDimensions } from "@utils/imageUtil";
 
 export const drawBackgroundImage = (
   sketch: SketchType,
   bgImage: Image,
-  options: ExtendedOptionsType,
-  bgCoverMode: "cover" | "contain" = "cover"
+  options: ExtendedOptionsType
 ): void => {
   const { width, height, image, colors, isColorFilterActive } = options;
 
@@ -21,16 +18,12 @@ export const drawBackgroundImage = (
 
   bgImage.loadPixels();
 
-  const bgComparisonFunc = bgCoverMode === "contain" ? gt : lt;
-  const dimensions = bgComparisonFunc(width, height)
-    ? {
-        height: height,
-        width: (height / bgImage.height) * bgImage.width,
-      }
-    : {
-        height: (width / bgImage.width) * bgImage.height,
-        width: width,
-      };
+  const dimensions = getCoverImageDimensions({
+    containerWidth: width,
+    containerHeight: height,
+    imageWidth: bgImage.width,
+    imageHeight: bgImage.height,
+  });
 
   sketch.imageMode(sketch.CENTER);
   sketch.image(
