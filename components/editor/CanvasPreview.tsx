@@ -1,6 +1,7 @@
 import { FC, useContext, useEffect, useRef } from "react";
-import { EditorContext, EditorContextType } from "./EditorContext";
 import { drawSketch, OptionsType } from "@components/artwork";
+import { EditorContext, EditorContextType } from "./EditorContext";
+import styles from "./canvas.module.css";
 
 export const CANVAS_CONTAINER_ID = "social-image-preview-canvas";
 
@@ -52,12 +53,11 @@ export const CanvasPreview: FC = () => {
     >
       <div
         ref={canvasRef}
-        style={{
-          width: contextState.state.width || 1200,
-          height: contextState.state.height || 640,
-        }}
         id={CANVAS_CONTAINER_ID}
-        className='rounded bg-gray-400 overflow-hidden shadow-lg grid place-content-center'
+        className={[
+          "grid place-content-center max-w-full max-h-full",
+          styles.canvasContainer,
+        ].join(" ")}
       />
     </div>
   );

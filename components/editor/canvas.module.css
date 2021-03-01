@@ -1,0 +1,6 @@
+.canvasContainer > canvas {
+    object-fit: contain;
+    max-width: 100%;
+    max-height: calc(100vh - 64px);
+    border-radius: 6px;
+}
