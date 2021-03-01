@@ -6,6 +6,7 @@ import DeleteIcon from "@components/icons/DeleteIcon";
 import { EditorContext } from "./EditorContext";
 import { EditorDropzone } from "./EditorDropzone";
 import { CANVAS_CONTAINER_ID } from "./CanvasPreview";
+import { RegenerateArtwortTooltip } from "./RegenerateArtwortTooltip";
 
 const defaults = {
   width: 1200,
@@ -230,7 +231,8 @@ const EditorForm: FC = () => {
           <DownloadIcon />
         </button>
       </fieldset>
-      <fieldset className='mt-2'>
+      <fieldset className='mt-2 relative'>
+        <RegenerateArtwortTooltip />
         <button
           className='w-full px-3 py-2 rounded bg-tertiary text-white font-bold disabled:opacity-50'
           type='submit'
