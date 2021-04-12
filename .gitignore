@@ -37,10 +37,13 @@ yarn-error.log*
 
 # vercel
 .vercel
+.next
 
 # Import-JS
 .importjs.js
 
-
 # Local Netlify folder
 .netlify
+
+# Lint staged
+.tsconfig-lint.json

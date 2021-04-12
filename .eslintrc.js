@@ -11,7 +11,7 @@ module.exports = {
     overrides: [
         // This configuration will apply only to TypeScript files
         {
-            plugins: ["import"],
+            plugins: ["@typescript-eslint", "import"],
             files: ["**/*.ts", "**/*.tsx"],
             parser: "@typescript-eslint/parser",
             settings: {
@@ -33,6 +33,7 @@ module.exports = {
             extends: [
                 "eslint:recommended",
                 "plugin:@typescript-eslint/recommended", // TypeScript rules
+				"plugin:@typescript-eslint/recommended-requiring-type-checking",
                 "plugin:react/recommended", // React rules
                 "plugin:react-hooks/recommended", // React hooks rules
                 "plugin:jsx-a11y/recommended", // Accessibility rules
