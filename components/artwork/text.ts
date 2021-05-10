@@ -7,14 +7,8 @@ export const drawText = (
   sketch: SketchType,
   options: ExtendedOptionsType
 ): void => {
-  const {
-    text,
-    colors,
-    font,
-    squareSize,
-    squaresPerHeight,
-    squaresPerWidth,
-  } = options;
+  const { text, colors, font, squareSize, squaresPerHeight, squaresPerWidth } =
+    options;
   const width = options.width || 1200;
   const height = options.height || 640;
   const padding = 32;

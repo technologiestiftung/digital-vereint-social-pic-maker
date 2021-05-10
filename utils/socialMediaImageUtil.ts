@@ -59,8 +59,7 @@ const socialMediaImageSizes: SocialMediaImageSizesType = {
       title: "Story",
       width: 1080,
       height: 1920,
-      note:
-        "Max file size 30mb…but remember the larger the image, the slower the buffer! According to [official guidelines](https://www.facebook.com/business/ads-guide/image/instagram-story/reach), “Consider leaving roughly 14% (250 pixels) of the top and bottom of the image free from text, logos or other key creative elements to avoid covering them with the profile icon or call to action.",
+      note: "Max file size 30mb…but remember the larger the image, the slower the buffer! According to [official guidelines](https://www.facebook.com/business/ads-guide/image/instagram-story/reach), “Consider leaving roughly 14% (250 pixels) of the top and bottom of the image free from text, logos or other key creative elements to avoid covering them with the profile icon or call to action.",
     },
     {
       id: "if_igtv_cover_image",
@@ -93,8 +92,7 @@ const socialMediaImageSizes: SocialMediaImageSizesType = {
       title: "Tweet",
       width: 1024,
       height: 512,
-      note:
-        "Aspect ratio 16:9. Max file size 5mb for photos/GIFs on phone, 15mb on desktop.",
+      note: "Aspect ratio 16:9. Max file size 5mb for photos/GIFs on phone, 15mb on desktop.",
     },
     {
       id: "tw_summary_card",
@@ -295,8 +293,7 @@ const socialMediaImageSizes: SocialMediaImageSizesType = {
       title: "Story",
       width: 1080,
       height: 1920,
-      note:
-        "Max file size 30mb. Avoid 250 pixels at the top and the bottom to prevent overlap with text.",
+      note: "Max file size 30mb. Avoid 250 pixels at the top and the bottom to prevent overlap with text.",
     },
     {
       id: "fb_feed_ad",
