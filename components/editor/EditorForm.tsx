@@ -1,4 +1,10 @@
-import { FC, InputHTMLAttributes, useContext, ReactElement } from "react";
+import {
+  FC,
+  InputHTMLAttributes,
+  useContext,
+  ReactElement,
+  FormEventHandler,
+} from "react";
 import { TEXT_MAX_LENGTH } from "@components/artwork/text";
 import DownloadIcon from "@components/icons/DownloadIcon";
 import ReloadIcon from "@components/icons/ReloadIcon";
@@ -131,7 +137,7 @@ const EditorForm: FC = () => {
     toggleColorFilter,
   } = useContext(EditorContext);
 
-  const handleSubmit = (evt: HTMLFormElement["onSubmit"]): void => {
+  const handleSubmit: FormEventHandler<HTMLFormElement> = evt => {
     evt.preventDefault();
 
     onSubmit({
@@ -143,7 +149,7 @@ const EditorForm: FC = () => {
     });
   };
 
-  const handleReset = (evt: HTMLFormElement["onReset"]): void => {
+  const handleReset: FormEventHandler<HTMLFormElement> = evt => {
     evt.preventDefault();
 
     onResetDraft();

@@ -57,16 +57,16 @@ describe("Draft", () => {
   });
   it("Should make state width accessible", () => {
     const width = screen.getByTestId("width");
-    expect(width).toContainHTML(`${defaults.draft.width}`);
+    expect(width).toContainHTML(String(defaults.draft.width));
   });
 
   it("Should make state height accessible", () => {
     const height = screen.getByTestId("height");
-    expect(height).toContainHTML(`${defaults.draft.height}`);
+    expect(height).toContainHTML(String(defaults.draft.height));
   });
   it("Should make state text accessible", () => {
     const text = screen.getByTestId("text");
-    expect(text).toContainHTML(`${defaults.draft.text}`);
+    expect(text).toContainHTML(String(defaults.draft.text));
   });
   it("Should make state image accessible", () => {
     const image = screen.getByTestId("image");
