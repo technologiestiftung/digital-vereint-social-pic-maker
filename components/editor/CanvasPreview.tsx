@@ -40,8 +40,8 @@ export const CanvasPreview: FC = () => {
     prevContext = contextState;
     if (canvasRef.current) {
       canvasRef.current.innerHTML = "";
-      renderSketch(canvasRef.current, contextState.state, {
-        onLoad: () => contextState.stopLoadingImage(),
+      void renderSketch(canvasRef.current, contextState.state, {
+        onLoad: () => void contextState.stopLoadingImage(),
       });
     }
   });

@@ -32,7 +32,7 @@ export const EditorDropzone: FC<{
   onImageDropAbort = () => console.log("file reading was aborted"),
 }) => {
   const onDrop = useCallback(
-    acceptedFiles => {
+    (acceptedFiles: File[]) => {
       const file = acceptedFiles[0];
       const reader = new FileReader();
 
