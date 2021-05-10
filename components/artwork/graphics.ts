@@ -48,14 +48,18 @@ const createSquaresMatrix = (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { black, ...allColorsButBlack } = colors;
 
-  return Array(squaresPerHeight).map((__, rowIdx) =>
-    Array(squaresPerWidth).map((_, columnIdx: number) => ({
-      x: columnIdx * squareSize,
-      y: rowIdx * squareSize,
-      color: randomFromArray<string>(Object.values(allColorsButBlack)),
-      isVisible: shouldSquareBeVisible({ ...options, columnIdx, rowIdx }),
-    }))
-  );
+  return Array(squaresPerHeight)
+    .fill(null)
+    .map((__, rowIdx) =>
+      Array(squaresPerWidth)
+        .fill(null)
+        .map((_, columnIdx: number) => ({
+          x: columnIdx * squareSize,
+          y: rowIdx * squareSize,
+          color: randomFromArray<string>(Object.values(allColorsButBlack)),
+          isVisible: shouldSquareBeVisible({ ...options, columnIdx, rowIdx }),
+        }))
+    );
 };
 
 export const drawGraphics = (
